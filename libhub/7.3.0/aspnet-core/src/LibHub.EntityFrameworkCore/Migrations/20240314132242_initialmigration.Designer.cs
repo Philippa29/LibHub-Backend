@@ -4,6 +4,7 @@ using LibHub.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibHub.Migrations
 {
     [DbContext(typeof(LibHubDbContext))]
-    partial class LibHubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240314132242_initialmigration")]
+    partial class initialmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1651,10 +1653,10 @@ namespace LibHub.Migrations
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("SpaceName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
+                    b.Property<int>("SpaceStatus")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -1662,7 +1664,7 @@ namespace LibHub.Migrations
                     b.ToTable("Spaces");
                 });
 
-            modelBuilder.Entity("LibHub.Domain.BookRequest.Transaction", b =>
+            modelBuilder.Entity("LibHub.Domain.BookRequest.BookRequest", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1692,24 +1694,16 @@ namespace LibHub.Migrations
                     b.Property<long?>("LastModifierUserId")
                         .HasColumnType("bigint");
 
-                    b.Property<Guid?>("LibrarianId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("RequestDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("ReturnDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.Property<Guid?>("StudentIDId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LibrarianId");
 
                     b.HasIndex("StudentIDId");
 
@@ -1749,8 +1743,8 @@ namespace LibHub.Migrations
                     b.Property<string>("ISBN")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("ImageId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -1768,8 +1762,6 @@ namespace LibHub.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ImageId");
 
                     b.ToTable("Books");
                 });
@@ -1807,47 +1799,6 @@ namespace LibHub.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("LibHub.Domain.StoredFiles.StoredFile", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("CreatorUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("DeleterUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FileName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FileType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Folder")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("LastModifierUserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("StoredFile");
                 });
 
             modelBuilder.Entity("LibHub.Domain.Users.Person", b =>
@@ -2222,28 +2173,13 @@ namespace LibHub.Migrations
                     b.Navigation("Space");
                 });
 
-            modelBuilder.Entity("LibHub.Domain.BookRequest.Transaction", b =>
+            modelBuilder.Entity("LibHub.Domain.BookRequest.BookRequest", b =>
                 {
-                    b.HasOne("LibHub.Domain.Users.Librarian", "Librarian")
-                        .WithMany()
-                        .HasForeignKey("LibrarianId");
-
                     b.HasOne("LibHub.Domain.Users.Student", "StudentID")
                         .WithMany()
                         .HasForeignKey("StudentIDId");
 
-                    b.Navigation("Librarian");
-
                     b.Navigation("StudentID");
-                });
-
-            modelBuilder.Entity("LibHub.Domain.Books.Book", b =>
-                {
-                    b.HasOne("LibHub.Domain.StoredFiles.StoredFile", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId");
-
-                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("LibHub.Domain.Users.Person", b =>

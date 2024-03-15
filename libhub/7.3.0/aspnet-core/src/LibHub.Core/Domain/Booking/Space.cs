@@ -1,4 +1,5 @@
 ﻿using Abp.Domain.Entities.Auditing;
+using LibHub.Domain.ENums;
 using Microsoft.AspNetCore.Components.Routing;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,11 @@ namespace LibHub.Domain.Booking
 {
     public class Space : FullAuditedEntity<Guid>
     {
-        public virtual string SpaceName { get; set; }
+        public virtual string Name { get; set; }
         public virtual int Capacity { get; set; }
 
         public virtual string Location { get; set; }
+
+        public virtual SpaceStatus Status { get; set; }
     }
 }

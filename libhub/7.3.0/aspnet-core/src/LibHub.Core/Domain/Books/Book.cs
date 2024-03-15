@@ -1,5 +1,6 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using LibHub.Domain.ENums;
+using LibHub.Domain.StoredFiles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,14 +19,15 @@ namespace LibHub.Domain.Books
 
         public virtual string Publisher { get; set; }
 
-
-        
         public virtual Guid CategoryID { get; set; }
 
-        public virtual string ImageUrl { get; set; }
+        public virtual StoredFile Image  { get; set; }
         public virtual BookStatus BookStatus { get; set; }
 
-        public virtual bool Taken { get; set; }
+        public virtual BookCondition BookCondition { get; set;  } 
+
+
+        
 
 
 

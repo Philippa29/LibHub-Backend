@@ -13,7 +13,7 @@ namespace LibHub.Domain.Booking
     public class Booking : FullAuditedEntity<Guid>
     {
 
-        public virtual Space SpaceID { get; set; }
+        public virtual Space Space { get; set; }
         public virtual DateTime BookingDate { get; set; }
 
         public virtual DateTime StartTime { get; set; }
@@ -21,10 +21,6 @@ namespace LibHub.Domain.Booking
         public virtual DateTime EndTime { get; set; }
 
         public virtual Person BookedBy { get; set; }
-
-        public virtual BookingStatus BookingStatus { get; set; }
-
-
 
     }
 

@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace LibHub.Domain.ENums
 {
-    public enum BookStatus : int
+    public enum SpaceStatus: int
     {
         [Description("Available")]
         Available = 1,
 
-        [Description("Unavailable")]
-        Unavailable = 2,
-
-
+        [Description("Busy")]
+        Busy = 2,
     }
 }

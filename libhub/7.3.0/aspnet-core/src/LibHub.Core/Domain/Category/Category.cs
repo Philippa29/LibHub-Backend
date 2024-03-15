@@ -9,9 +9,7 @@ namespace LibHub.Domain.Category
 {
     public class Category : FullAuditedEntity<Guid>
     {
-
-        //type 
-        public virtual string Type { get; set; }
-        public virtual Category SubCategory { get; set; }
+        public virtual string Name { get; set; }
+    
     }
 }

@@ -10,11 +10,11 @@ namespace LibHub.Domain.Users
 {
     public class Person : FullAuditedEntity<Guid>
     {
-        public virtual string FirstName { get; set; }
+        public virtual string Name { get; set; }
 
-        public virtual string LastName { get; set; }
+        public virtual string Surname { get; set; }
 
-        public virtual string Email { get; set; }
+        public virtual string EmailAddress { get; set; }
 
         public virtual string PhoneNumber { get; set; }
 

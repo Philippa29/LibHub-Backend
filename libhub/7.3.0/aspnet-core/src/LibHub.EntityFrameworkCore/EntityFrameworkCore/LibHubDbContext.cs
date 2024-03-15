@@ -8,6 +8,7 @@ using LibHub.Domain.Users;
 using LibHub.Domain.BookRequest;
 using LibHub.Domain.Books;
 using LibHub.Domain.Booking;
+using LibHub.Domain.StoredFiles;
 
 namespace LibHub.EntityFrameworkCore
 {
@@ -17,12 +18,14 @@ namespace LibHub.EntityFrameworkCore
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Book> Books { get; set; }
-        public DbSet<BookRequest> BookRequests { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Librarian> Librarians { get; set; }
 
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Space> Spaces { get; set; }
+
+        public DbSet<StoredFile> StoredFile { get; set; }
 
 
 
