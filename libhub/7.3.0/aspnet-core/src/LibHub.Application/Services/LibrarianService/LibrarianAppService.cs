@@ -33,7 +33,7 @@ namespace LibHub.Services.LibrarianService
         public async Task<LibrarianDto> CreateLibrarianAsync(LibrarianDto input)
         {
             var user = ObjectMapper.Map<User>(input);
-            user.UserName = input.FirstName;
+            user.UserName = input.StaffID;
 
             ////Console.WriteLine("Email: " + user.EmailAddress);
 

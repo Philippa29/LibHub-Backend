@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibHub.Domain.Category
+namespace LibHub.Domain.Categories
 {
     public class Category : FullAuditedEntity<Guid>
     {

@@ -1,5 +1,5 @@
 ﻿using Abp.AutoMapper;
-using LibHub.Domain.Category;
+using LibHub.Domain.Categories;
 using LibHub.Domain.ENums;
 using System;
 using System.Collections.Generic;

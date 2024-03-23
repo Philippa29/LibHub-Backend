@@ -3,7 +3,7 @@ using Abp.Zero.EntityFrameworkCore;
 using LibHub.Authorization.Roles;
 using LibHub.Authorization.Users;
 using LibHub.MultiTenancy;
-using LibHub.Domain.Category;
+using LibHub.Domain.Categories;
 using LibHub.Domain.Users;
 using LibHub.Domain.BookRequest;
 using LibHub.Domain.Books;

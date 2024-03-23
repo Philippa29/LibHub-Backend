@@ -5,15 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.Application.Services;
 using LibHub.Services.Dtos;
+using Microsoft.AspNetCore.Http;
 
 namespace LibHub.Services.BookService
 {
     public interface IBookAppService : IApplicationService
     {
-        Task<BookDto> CreateBookAsync(BookDto input);
+        Task<BookDto > CreateBookAsync(BookDto input);
         Task<BookDto> UpdateBookAsync(Guid id);
 
-        Task<List<BookDto>> GetBookAsync(Guid id);
+        Task<BookDto> GetBookAsync(Guid id);
 
         //Task<List<BookDto>> GetAllBooksAsync();
 

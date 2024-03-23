@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LibHub.Domain.Books;
+using LibHub.Domain.StoredFiles;
 using LibHub.Services.Dtos;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,21 @@ namespace LibHub.Services.BookService
     {
         public BookMappingProfile()
         {
-            CreateMap<Book, BookDto>();
-            CreateMap<BookDto, Book>();
+            CreateMap<Book, BookDto>()
+           //     .ForMember(x => x.ImageId, e => e.MapFrom(x => x.Image != null ? x.Image.Id : (Guid?)null))
+                .ForMember(x => x.CategoryID, e => e.MapFrom(x => x.Category != null ? x.Category.Id : (Guid?)null))
+                .ForMember(x => x.File, e => e.Ignore());
+
+            CreateMap<BookDto, Book>()
+                .ForMember(x => x.Id, e => e.Ignore());
+
+            //CreateMap<Get_BookDto, Book>()
+            //    .ForMember(x => x.Image, e => e.MapFrom(x => x. != null ? x.Image.Id : (Guid?)null))
+            //    .ForMember(x => x.CategoryID, e => e.MapFrom(x => x.Category != null ? x.Category.Id : (Guid?)null)); 
 
 
+            //CreateMap<StoredFile, StoredFileDto>();
+            //CreateMap<StoredFileDto, StoredFile>();
         }
         
     }

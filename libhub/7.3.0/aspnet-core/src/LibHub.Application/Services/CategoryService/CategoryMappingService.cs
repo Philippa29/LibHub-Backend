@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using LibHub.Domain.Category;
+using LibHub.Domain.Categories;
 using LibHub.Services.Dtos;
 using System;
 using System.Collections.Generic;

@@ -14,7 +14,5 @@ namespace LibHub.Domain.ENums
 
         [Description("Unavailable")]
         Unavailable = 2,
-
-
     }
 }

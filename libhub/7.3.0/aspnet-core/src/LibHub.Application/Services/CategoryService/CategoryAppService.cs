@@ -2,7 +2,6 @@
 using Abp.Domain.Repositories;
 using Abp.ObjectMapping;
 using AutoMapper;
-using LibHub.Domain.Category;
 using Microsoft.AspNetCore.Identity;
 using LibHub.Services.Dtos;
 using System;
@@ -13,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
+using LibHub.Domain.Categories;
 
 
 namespace LibHub.Services.CategoryService

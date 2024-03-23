@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibHub.Migrations
 {
     [DbContext(typeof(LibHubDbContext))]
-    [Migration("20240314144834_initialmigration1")]
-    partial class initialmigration1
+    [Migration("20240322082034_createbook")]
+    partial class createbook
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1715,7 +1715,7 @@ namespace LibHub.Migrations
 
                     b.HasIndex("StudentIDId");
 
-                    b.ToTable("BookRequests");
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("LibHub.Domain.Books.Book", b =>
@@ -1733,7 +1733,7 @@ namespace LibHub.Migrations
                     b.Property<int>("BookStatus")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("CategoryID")
+                    b.Property<Guid?>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationTime")
@@ -1771,12 +1771,14 @@ namespace LibHub.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.HasIndex("ImageId");
 
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("LibHub.Domain.Category.Category", b =>
+            modelBuilder.Entity("LibHub.Domain.Categories.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1817,39 +1819,15 @@ namespace LibHub.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("CreatorUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("DeleterUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FileType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Folder")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("LastModifierUserId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
-                    b.ToTable("StoredFile");
+                    b.ToTable("StoredFiles");
                 });
 
             modelBuilder.Entity("LibHub.Domain.Users.Person", b =>
@@ -2241,9 +2219,15 @@ namespace LibHub.Migrations
 
             modelBuilder.Entity("LibHub.Domain.Books.Book", b =>
                 {
+                    b.HasOne("LibHub.Domain.Categories.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
                     b.HasOne("LibHub.Domain.StoredFiles.StoredFile", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId");
+
+                    b.Navigation("Category");
 
                     b.Navigation("Image");
                 });

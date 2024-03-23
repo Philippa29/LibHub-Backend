@@ -4,6 +4,7 @@ using LibHub.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibHub.Migrations
 {
     [DbContext(typeof(LibHubDbContext))]
-    partial class LibHubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240322083414_createbooks")]
+    partial class createbooks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1825,7 +1827,7 @@ namespace LibHub.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StoredFile");
+                    b.ToTable("StoredFiles");
                 });
 
             modelBuilder.Entity("LibHub.Domain.Users.Person", b =>

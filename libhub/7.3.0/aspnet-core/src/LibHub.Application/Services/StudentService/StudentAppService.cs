@@ -33,9 +33,7 @@ namespace LibHub.Services.StudentService
         {
             var user = ObjectMapper.Map<User>(input);
             user.UserName = input.StudentID;
-            user.Name = input.FirstName;
-            user.Surname = input.LastName;
-            user.EmailAddress = input.EmailAddress;
+
 
             ////Console.WriteLine("Email: " + user.EmailAddress);
 

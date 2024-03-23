@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LibHub.Migrations
 {
-    public partial class initialmigration : Migration
+    public partial class initialmigrationagain : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -445,32 +445,6 @@ namespace LibHub.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Books",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Author = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ISBN = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Publisher = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CategoryID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BookStatus = table.Column<int>(type: "int", nullable: false),
-                    BookCondition = table.Column<int>(type: "int", nullable: false),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
-                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Books", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
@@ -494,10 +468,10 @@ namespace LibHub.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SpaceName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Capacity = table.Column<int>(type: "int", nullable: false),
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SpaceStatus = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -509,6 +483,19 @@ namespace LibHub.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Spaces", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StoredFile",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileType = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StoredFile", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -862,6 +849,37 @@ namespace LibHub.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Books",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Author = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ISBN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Publisher = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ImageId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BookStatus = table.Column<int>(type: "int", nullable: false),
+                    BookCondition = table.Column<int>(type: "int", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Books", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Books_StoredFile_ImageId",
+                        column: x => x.ImageId,
+                        principalTable: "StoredFile",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AbpDynamicEntityPropertyValues",
                 columns: table => new
                 {
@@ -999,7 +1017,7 @@ namespace LibHub.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookRequests",
+                name: "Transactions",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -1007,6 +1025,8 @@ namespace LibHub.Migrations
                     BookID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RequestDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LibrarianId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -1017,9 +1037,14 @@ namespace LibHub.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookRequests", x => x.Id);
+                    table.PrimaryKey("PK_Transactions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BookRequests_Person_StudentIDId",
+                        name: "FK_Transactions_Person_LibrarianId",
+                        column: x => x.LibrarianId,
+                        principalTable: "Person",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Transactions_Person_StudentIDId",
                         column: x => x.StudentIDId,
                         principalTable: "Person",
                         principalColumn: "Id");
@@ -1388,14 +1413,24 @@ namespace LibHub.Migrations
                 column: "SpaceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookRequests_StudentIDId",
-                table: "BookRequests",
-                column: "StudentIDId");
+                name: "IX_Books_ImageId",
+                table: "Books",
+                column: "ImageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Person_UserId",
                 table: "Person",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transactions_LibrarianId",
+                table: "Transactions",
+                column: "LibrarianId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transactions_StudentIDId",
+                table: "Transactions",
+                column: "StudentIDId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -1485,13 +1520,13 @@ namespace LibHub.Migrations
                 name: "Bookings");
 
             migrationBuilder.DropTable(
-                name: "BookRequests");
-
-            migrationBuilder.DropTable(
                 name: "Books");
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Transactions");
 
             migrationBuilder.DropTable(
                 name: "AbpDynamicEntityProperties");
@@ -1510,6 +1545,9 @@ namespace LibHub.Migrations
 
             migrationBuilder.DropTable(
                 name: "Spaces");
+
+            migrationBuilder.DropTable(
+                name: "StoredFile");
 
             migrationBuilder.DropTable(
                 name: "Person");
