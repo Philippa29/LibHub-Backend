@@ -1,0 +1,24 @@
+﻿using AutoMapper;
+using LibHub.Authorization.Users;
+using LibHub.Domain.Users;
+using LibHub.Services.Dtos;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LibHub.Services.StudentService
+{
+    public class StudentMappingProfile : Profile
+    {
+        public StudentMappingProfile()
+        {
+            CreateMap<Student, StudentDto>();
+            CreateMap<StudentDto, Student>();
+            CreateMap<StudentDto, User>()
+                .ForMember(e => e.Id, d => d.Ignore()); //ignores keys 
+
+        }
+    }
+}
