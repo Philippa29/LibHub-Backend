@@ -18,10 +18,13 @@ namespace LibHub.Services.BookService
 
         //Task<List<BookDto>> GetAllBooksAsync();
 
-        Task<List<BookDto>> GetAvailableBooksAsync(); 
+        Task<List<BookDto>> GetAvailableBooksAsync();
+
+        Task<List<BookDto>> GetAllBooksAsync(); 
 
 
-        
+
+
 
         Task DeleteBook(Guid id);
 

@@ -67,7 +67,11 @@ namespace LibHub.Services.CategoryService
         public async Task<List<CategoryDto>> GetAllCategories()
         {
             var categories = await _categoryRepository.GetAll().ToListAsync();
-            return ObjectMapper.Map<List<CategoryDto>>(categories);
+            return categories.Select(category => new CategoryDto
+            {
+                Id = category.Id,
+                Name = category.Name
+            }).ToList();
         }
 
 

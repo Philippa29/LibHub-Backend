@@ -14,6 +14,8 @@ namespace LibHub.Services.Dtos
     public class StoredFileDto : EntityDto<Guid?>
     {
         public IFormFile File { get; set; }
+
+
     }
 }
 

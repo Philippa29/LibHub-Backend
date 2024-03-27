@@ -14,6 +14,7 @@ using LibHub.Domain.Users;
 using LibHub.Authorization.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace LibHub.Services.StudentService
@@ -27,8 +28,9 @@ namespace LibHub.Services.StudentService
             _studentRepository = studentRepository;
             _userManager = userManager;
         }
+
+        //[AllowAnonymous]
         [HttpPost]
-        
         public async Task<StudentDto> CreateStudentAsync(StudentDto input)
         {
             var user = ObjectMapper.Map<User>(input);

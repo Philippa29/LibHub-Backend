@@ -81,7 +81,11 @@ namespace LibHub.Services.BookService
 
 
 
-
+        public async Task<List<BookDto>> GetAllBooksAsync()
+        {
+            var book = await _bookRepository.GetAllListAsync();
+            return ObjectMapper.Map<List<BookDto>>(book);
+        }
 
 
         //get book by isbn number
@@ -94,8 +98,10 @@ namespace LibHub.Services.BookService
 
 
 
+
         public async Task<BookDto> UpdateBookAsync(Guid id )
         {
+            //i get 
             var book = await _bookRepository.GetAsync(id);
             var update = await _bookRepository.UpdateAsync(book);
             return ObjectMapper.Map<BookDto>(update);

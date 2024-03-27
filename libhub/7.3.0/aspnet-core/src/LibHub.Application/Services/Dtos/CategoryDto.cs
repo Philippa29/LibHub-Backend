@@ -13,7 +13,7 @@ namespace LibHub.Services.Dtos
     [AutoMap(typeof(Category))]
     public class CategoryDto
     {
-
+        public virtual Guid Id { get; set; }
         public virtual string Name { get; set; }
 
 

@@ -22,13 +22,7 @@ namespace LibHub.Services.BookService
             CreateMap<BookDto, Book>()
                 .ForMember(x => x.Id, e => e.Ignore());
 
-            //CreateMap<Get_BookDto, Book>()
-            //    .ForMember(x => x.Image, e => e.MapFrom(x => x. != null ? x.Image.Id : (Guid?)null))
-            //    .ForMember(x => x.CategoryID, e => e.MapFrom(x => x.Category != null ? x.Category.Id : (Guid?)null)); 
-
-
-            //CreateMap<StoredFile, StoredFileDto>();
-            //CreateMap<StoredFileDto, StoredFile>();
+            
         }
         
     }
